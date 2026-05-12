@@ -1,0 +1,139 @@
+AI Documentation
+COMPX201 Assignment 3 - part 3
+
+Prompts used:
+"generate a comprehensive junit 5 test suite in a class called hash table AI test that covers edge cases, 
+inputs that are not to simple like a b or c and that it imporves the coverage of my code. 
+Do it for this scripts:"(then i put my hash table script below)
+
+Verification steps
+Step 1 - checking for errors
+I opened a terminal in my assignment 3 folder and ran the line:
+
+javac -cp ".:junit-platform-console-standalone-1.10.0.jar" *.java
+
+There were no errors of any kind with the ai script
+
+Step 2 - runing the code
+I then put in this line to run the code:
+
+java -jar junit-platform-console-standalone-1.10.0.jar --class-path . --scan-class-path
+
+this was the output:
+
+💚 Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+╷
+├─ JUnit Jupiter ✔
+│  ├─ HashTableTest ✔
+│  │  ├─ testDumpEmptyTable() ✔
+│  │  ├─ testSizeDecreause() ✔
+│  │  ├─ testGetNotFound() ✔
+│  │  ├─ testSizeIncrease() ✔
+│  │  ├─ testContainsTrue() ✔
+│  │  ├─ testRemoveExisting() ✔
+│  │  ├─ testPutIncreasesSize() ✔
+│  │  ├─ testHashLongTitle() ✔
+│  │  ├─ testContainsFalse() ✔
+│  │  ├─ testRemoveNonexistent() ✔
+│  │  ├─ testHashConsistent() ✔
+│  │  ├─ testPutCollision() ✔
+│  │  ├─ testDumpWithRecord() ✔
+│  │  ├─ testRehashTriggered() ✔
+│  │  ├─ testIsEmpty() ✔
+│  │  ├─ testRehashSizeCorrect() ✔
+│  │  ├─ testGetMultiple() ✔
+│  │  └─ testIsEmptyAddAndRemove() ✔
+│  └─ RecordHashTable — AI Test Suite ✔
+│     ├─ dump() — smoke tests ✔
+│     │  ├─ dump() does not throw on empty table ✔
+│     │  └─ dump() does not throw after puts and removes ✔
+│     ├─ Stress tests — large number of records ✔
+│     │  ├─ Alternating put/remove keeps size consistent ✔
+│     │  └─ Inserting 500 unique records all remain retrievable ✔
+│     ├─ Unusual and long titles ✔
+│     │  ├─ Title with spaces and special characters ✔
+│     │  ├─ Title with numbers ✔
+│     │  ├─ Very long title can be stored and retrieved ✔
+│     │  └─ Unicode / non-ASCII title ✔
+│     ├─ hashFunction — boundary / determinism checks ✔
+│     │  ├─ hashFunction returns a non-negative index ✔
+│     │  ├─ hashFunction is deterministic — same title always maps to same slot ✔
+│     │  └─ Single-character titles handled without error ✔
+│     │     ├─ Single-char title "X" does not crash ✔
+│     │     ├─ Single-char title "Z" does not crash ✔
+│     │     ├─ Single-char title "M" does not crash ✔
+│     │     └─ Single-char title "Q" does not crash ✔
+│     ├─ Rehashing — load threshold behaviour ✔
+│     │  ├─ Size count is correct after rehash ✔
+│     │  ├─ All records survive a rehash ✔
+│     │  └─ Tombstones are not rehashed (not counted in new table) ✔
+│     ├─ Collision handling via linear probing ✔
+│     │  ├─ All records are retrievable when collisions force probing ✔
+│     │  └─ get() for absent record does not return a collision neighbour ✔
+│     ├─ remove() and tombstone behaviour ✔
+│     │  ├─ contains returns false after remove ✔
+│     │  ├─ Re-inserting a removed title works correctly ✔
+│     │  ├─ get returns null after remove ✔
+│     │  ├─ Removing a record does not affect other records at nearby slots ✔
+│     │  ├─ Records inserted after removal are still retrievable (tombstone probing) ✔
+│     │  ├─ isEmpty returns true when last record is removed ✔
+│     │  ├─ Removing a non-existent record does not alter size ✔
+│     │  └─ size decrements after remove ✔
+│     ├─ Duplicate key handling ✔
+│     │  ├─ Putting same title twice does not increase size ✔
+│     │  └─ Putting same title twice updates the stored record ✔
+│     ├─ put / get / contains — basic behaviour ✔
+│     │  ├─ size increments correctly after multiple puts ✔
+│     │  ├─ put then get returns correct record ✔
+│     │  ├─ table is no longer empty after a put ✔
+│     │  ├─ contains returns true after put ✔
+│     │  ├─ Multiple records can be retrieved independently ✔
+│     │  └─ get returns null for a title not in the table ✔
+│     └─ Construction & empty state ✔
+│        ├─ contains() on empty table returns false ✔
+│        ├─ Newly created table has size 0 ✔
+│        ├─ get() on empty table returns null ✔
+│        └─ Newly created table is empty ✔
+├─ JUnit Vintage ✔
+└─ JUnit Platform Suite ✔
+
+Test run finished after 93 ms
+[        16 containers found      ]
+[         0 containers skipped    ]
+[        16 containers started    ]
+[         0 containers aborted    ]
+[        16 containers successful ]
+[         0 containers failed     ]
+[        57 tests found           ]
+[         0 tests skipped         ]
+[        57 tests started         ]
+[         0 tests aborted         ]
+[        57 tests successful      ]
+[         0 tests failed          ]
+
+
+WARNING: Delegated to the 'execute' command.
+         This behaviour has been deprecated and will be removed in a future release.
+         Please use the 'execute' command directly.
+
+All 57 tests were passed (0 failures, 0 errors, 0 skipped).
+Out of this the 18 human tests were passed and the 39 AI tests were passed.
+
+Evaluation
+Overall the AI tests were pretty good. It tested my code a lot more thourghly then I did
+as it had a lot more tests per function. It also did quite a few tests that I missed like
+testing my tombstones and stress testing will large amount of data like in 
+AlternatingPutRemove. It also used actual song names like I did instead of trivial inputs 
+like "A" or "B".
+
+Some weaknesses of the AI tests was the lack of 0 or negative years for a record or not
+filling up the table until theres just one empty slot before rehash is triggered.
+
+Conclusion
+Overall I still think that the AI testing was pretty good and helpped me exspand my coverage
+for my code a lot. Even though it still had some weaknesses I think there were pretty minor and 
+overall were out weighed by the strenghs. It was a lot better than the human written tests as 
+AI can write code a lot quicker then I can and can there for produce more test cases allowing 
+for more coverage. I think its impressive that the AI didnt require any modification or 
+extra prompting and produced solid coverage with just 1 prompt. 
