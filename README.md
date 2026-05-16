@@ -34,4 +34,12 @@ javac *.java
 java RecordLookup
 ```
 
+## Controls
+Type:
+ 1. To get the size
+ 2. Print the table
+ 3. Search a record
+ 4. To add a record
+ 5. To remove a record
+ 6. To Exit
  
